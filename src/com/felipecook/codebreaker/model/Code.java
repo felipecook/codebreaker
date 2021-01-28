@@ -15,7 +15,46 @@ public class Code {
     }
   }
 
-   
+  @Override
+  public String toString() {
+    return new String(secret);
+  }
 
+
+  public class Guess {
+
+    private final String text;
+
+    // this holds the number that are the correct characters in the correct position
+    private final int correct;
+
+    // this holds the number that are the correct characters but are in the incorrect position
+    private final int close;
+
+    public Guess (String text) {
+
+      this.text = text;
+      int correct = 0;
+      int close = 0;
+
+      for (int i = 0; i < secret.length; i++) {
+
+        char current = secret[i];
+        int position = text.indexOf(current);
+
+        if (i == position){
+          correct++;
+        } else if (position >= 0) {
+          close++;
+        }
+
+      }
+
+      this.correct = correct;
+      this.close = close;
+
+    }
+
+  }
 
 }
