@@ -23,6 +23,8 @@ public class Code {
 
   public class Guess {
 
+    private static final String STRING_FORMAT = "{text: \"%s\", correct: %d, close: %d}";
+
     private final String text;
 
     // this holds the number that are the correct characters in the correct position
@@ -55,6 +57,23 @@ public class Code {
 
     }
 
+
+    @Override
+    public String toString() {
+      return String.format(STRING_FORMAT, text, correct, close);
+    }
+
+    public String getText() {
+      return text;
+    }
+
+    public int getCorrect() {
+      return correct;
+    }
+
+    public int getClose() {
+      return close;
+    }
   }
 
 }
