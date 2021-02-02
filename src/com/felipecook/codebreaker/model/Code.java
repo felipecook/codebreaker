@@ -1,6 +1,7 @@
 package com.felipecook.codebreaker.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -43,10 +44,19 @@ public class Code {
       int close = 0;
       Map<Character, Set<Integer>> letterMap = new HashMap<>();
 
-      for (Character:
-      text) {
+      char[] letters = text.toCharArray();
+
+      for (int i = 0; i < letters.length; i++) {
+
+        char letter = letters[i];
+        Set<Integer> positions = letterMap.getOrDefault(letter, new HashSet<>());
+        positions.add(i);
+        letterMap.putIfAbsent(letter, positions);
         
       }
+
+
+
 
       for (int i = 0; i < secret.length; i++) {
 
