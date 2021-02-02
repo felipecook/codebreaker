@@ -1,7 +1,10 @@
 package com.felipecook.codebreaker.model;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -52,21 +55,36 @@ public class Code {
         Set<Integer> positions = letterMap.getOrDefault(letter, new HashSet<>());
         positions.add(i);
         letterMap.putIfAbsent(letter, positions);
-        
+
       }
 
+      char[] work = Arrays.copyOf(secret, secret.length);
 
+      // CHECK FOR CORRECT MATCHES
+      for (int i = 0; i < work.length; i++){
 
+        char letter = work[i];
 
-      for (int i = 0; i < secret.length; i++) {
-
-        char current = secret[i];
-        int position = text.indexOf(current);
-
-        if (i == position){
+        Set<Integer> positions = letterMap.getOrDefault(letter, Collections.emptySet());
+        if (positions.contains(i)){
           correct++;
-        } else if (position >= 0) {
-          close++;
+          positions.remove(i);
+          work[i] = 0;
+        }
+      }
+
+      for (int i = 0; i < work.length; i++) {
+        char letter = work[i];
+
+        if(letter != 0){
+          Set<Integer> positions = letterMap.getOrDefault(letter, Collections.emptySet());
+          if(positions.size() > 0){
+            close++;
+            // ALL COLLECTIONS HAVE AN ITERATOR!
+            Iterator<Integer> iter = positions.iterator();
+            iter.next();
+            iter.remove();
+          }
         }
 
       }
