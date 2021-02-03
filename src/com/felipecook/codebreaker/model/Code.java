@@ -45,18 +45,7 @@ public class Code {
       this.text = text;
       int correct = 0;
       int close = 0;
-      Map<Character, Set<Integer>> letterMap = new HashMap<>();
-
-      char[] letters = text.toCharArray();
-
-      for (int i = 0; i < letters.length; i++) {
-
-        char letter = letters[i];
-        Set<Integer> positions = letterMap.getOrDefault(letter, new HashSet<>());
-        positions.add(i);
-        letterMap.putIfAbsent(letter, positions);
-
-      }
+      Map<Character, Set<Integer>> letterMap = getLetterMap(text);
 
       char[] work = Arrays.copyOf(secret, secret.length);
 
@@ -73,6 +62,7 @@ public class Code {
         }
       }
 
+      // CHECK FOR CLOSE MATCHES
       for (int i = 0; i < work.length; i++) {
         char letter = work[i];
 
@@ -92,6 +82,22 @@ public class Code {
       this.correct = correct;
       this.close = close;
 
+    }
+
+    private Map<Character, Set<Integer>> getLetterMap(String text) {
+      Map<Character, Set<Integer>> letterMap = new HashMap<>();
+
+      char[] letters = text.toCharArray();
+
+      for (int i = 0; i < letters.length; i++) {
+
+        char letter = letters[i];
+        Set<Integer> positions = letterMap.getOrDefault(letter, new HashSet<>());
+        positions.add(i);
+        letterMap.putIfAbsent(letter, positions);
+
+      }
+      return letterMap;
     }
 
 
