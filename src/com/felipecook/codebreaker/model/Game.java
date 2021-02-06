@@ -20,7 +20,8 @@ public class Game {
     guesses = new LinkedList<>();
     this.pool = pool;
     this.length = length;
-    
+    badGuessPattern = String.format(BAD_GUESS_PATTERN_FORMAT, pool);
+
   }
 
   public Code getCode() {
@@ -41,6 +42,9 @@ public class Game {
 
   public Guess guess(String text){
     if (text.length() != length){
+      // TODO Do something to indicate the guess is bad.
+    }
+    if (text.matches(badGuessPattern)){
       // TODO Do something to indicate the guess is bad.
     }
 
