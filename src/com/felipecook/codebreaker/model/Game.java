@@ -42,11 +42,14 @@ public class Game {
 
   public Guess guess(String text){
     if (text.length() != length){
-      // TODO Do something to indicate the guess is bad.
+      throw new IllegalArgumentException();
     }
     if (text.matches(badGuessPattern)){
-      // TODO Do something to indicate the guess is bad.
+      throw new IllegalArgumentException();
     }
+    Guess guess = code.new Guess(text);
+    guesses.add(guess);
+    return guess;
 
 
   }
