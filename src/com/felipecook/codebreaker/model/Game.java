@@ -51,7 +51,7 @@ public class Game {
     }
     if (text.matches(badGuessPattern)){
       throw new IllegalArgumentException(String.format(
-          ILLEGAL_CHARACTER_MESSAGE, code, text));
+          ILLEGAL_CHARACTER_MESSAGE, pool, text));
     }
     Guess guess = code.new Guess(text);
     guesses.add(guess);
