@@ -18,6 +18,7 @@ public class Game {
   private final String pool;
   private final int length;
   private final String badGuessPattern;
+  private final String goodCharacterPattern;
 
   public Game(String pool, int length, Random rng){
     code = new Code(pool, length, rng);
@@ -25,7 +26,7 @@ public class Game {
     this.pool = pool;
     this.length = length;
     badGuessPattern = String.format(BAD_GUESS_PATTERN_FORMAT, pool);
-
+    goodCharacterPattern = String.format(null);
   }
 
   public Code getCode() {
@@ -44,11 +45,21 @@ public class Game {
     return length;
   }
 
+  public int getGuessCount() {
+    return guesses.size();
+  }
+
+
   public Guess guess(String text){
     if (text.length() != length){
       throw new IllegalArgumentException(
           String.format(ILLEGAL_LENGTH_MESSAGE, length, text.length()));
     }
+    /* String badCharacters = text.replaceAll(goodCharacterPattern, "");
+    if (!badCharacters.isEmpty()){
+      throw new IllegalArgumentException(String.format(ILLEGAL_CHARACTER_MESSAGE, pool, badCharacters));
+    }*/
+
     if (text.matches(badGuessPattern)){
       throw new IllegalArgumentException(String.format(
           ILLEGAL_CHARACTER_MESSAGE, pool, text));

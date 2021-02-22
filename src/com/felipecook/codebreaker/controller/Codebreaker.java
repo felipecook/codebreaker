@@ -35,7 +35,7 @@ public class Codebreaker {
         System.exit(1);
       } catch (IllegalArgumentException e){
         System.out.println(e.getMessage());
-      }
+      }  
     } while (!correct);
 
   }
